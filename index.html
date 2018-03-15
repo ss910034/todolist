@@ -3,10 +3,21 @@
 
 <head>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+  <script type="text/javascript">
+  	$.ajax({
+  		url:"http://138.68.247.188/cse/class/todolist/command.php?type=get&name=notifydata",
+  		success:function(res){
+  			$("#notify").text(res);
+  		}
+
+  	});
+  </script>
   <meta charset="UTF-8">
   <title>TodoList</title>  
 </head>
 <body>
-	
+	<div id="notify">
+		
+	</div>
 </body>
 </html>

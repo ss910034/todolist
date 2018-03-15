@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+  <script type="text/javascript">
+    var item_template = "<li class='{{class}}'>{{num}}.{{name}}({{date}})</li>";
+    var data_url ="http://138.68.247.188/cse/class/todolist/data/tododata.txt";
+    var tododata;
+  	$.ajax({
+  		url:data_url,
+  		success:function(res){
+        tododata = JSON.parse(res);
+        for(var i=0;i<tododata.length;i++){
+          var now_class="";
+          if(tododata[i].done==true)
+            now_class = "done";
+          var now_item = item_template.replace("{{num}}",i+1)
+                                      .replace("{{name}}",tododata[i].name)
+                                      .replace("{{date}}",tododata[i].date)
+                                      .replace("{{class}}",now_class);
+          $("#listitem").append(now_item);
+        }
+  		}
+
+  	});
+  </script>
+  <style type="text/css">
+    *{
+      font-family: "微軟正黑體";
+    }
+    body{
+      padding: 30px;
+    }
+    .todolist{
+      display: inline-block;
+      padding: 20px;
+      border: solid 3px black;
+    }
+    .todolist ul{
+      padding:0px;
+    }
+    .todolist li{
+      list-style: none;
+      width: 300px;
+      padding: 5px;
+    }
+    .done:before {
+      content: " ✓ ";
+      color: red;
+    }
+  </style>
+  <meta charset="UTF-8">
+  <title>TodoList</title>  
+</head>
+<body>
+  <h2>JSON與ajax的結合</h2>
+  <h4>JSON.parse(文字)->物件結構</h4>
+  <div class="todolist">
+    <h3>我的代辦清單</h3>
+    <hr>
+    <ul id="listitem">
+    </ul>
+  </div>
+	<div id="notify">
+		
+	</div>
+</body>
+</html>
